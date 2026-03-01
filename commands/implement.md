@@ -27,7 +27,7 @@ Before writing any code, enter plan mode to design the approach:
 
 1. Explore the codebase to understand existing patterns, structure, and conventions.
 2. Identify which files need to be created or modified.
-3. Write a step-by-step implementation plan.
+3. Write a step-by-step implementation plan. **Each step implicitly includes a review cycle** — do not list review as a separate step; it is understood that every step will be implemented, reviewed, and committed before moving on.
 4. Present the plan to the user for approval via ExitPlanMode.
 
 Do NOT skip planning. Even for seemingly simple tasks, confirm the approach first.
@@ -36,7 +36,7 @@ When designing steps, **prefer single-language steps**. If a task involves chang
 
 ## Step 3: Implement, Review, and Commit — One Step at a Time
 
-Iterate through the approved plan **one step/phase at a time**. For each step, determine the appropriate language and agents based on the files being touched.
+Work through the approved plan **one step at a time**. For each step: implement, review, commit, then move on to the next step. The review agent is the gate — once it signs off and the step is committed, proceed to the next step automatically. For each step, determine the appropriate language and agents based on the files being touched.
 
 ### Language and Agent Selection
 
@@ -88,7 +88,7 @@ Once the review passes and tests pass, commit the step with a message describing
 
 ### 3f: Next Step
 
-Move to the next step in the plan and repeat from 3a. Do not proceed to the next step until the current step is committed and passing.
+Once the review passes and the step is committed, proceed to the next step in the plan and repeat from 3a.
 
 ## Step 4: Reset
 
@@ -104,7 +104,7 @@ This leaves all changes staged but uncommitted, so the user can craft the final 
 
 ## Rules
 
-- **One step at a time.** Never send the full plan to an agent. Implement, review, and commit each step before moving on.
+- **One step at a time.** Never send the full plan to an agent. Implement, review, and commit each step before moving on. The review sign-off is the gate — once it passes, proceed automatically.
 - **Never skip the review.** Every step gets reviewed before it is committed.
 - **Reviews are always isolated.** Always a separate review agent — never review in the implementation context.
 - **One fix per commit.** Each review issue is addressed and committed individually. These are checkpoints, not final history.
