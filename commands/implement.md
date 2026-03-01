@@ -17,15 +17,9 @@ Before doing anything else, work with the user to fully understand what they wan
 
 Do NOT skip discovery. Even if the request seems clear, confirm your understanding with the user before proceeding.
 
-## Step 1: Record Starting Point
+## Step 1: Verify Clean State
 
-Before any work begins, record the current HEAD so we can reset at the end:
-
-```
-git rev-parse HEAD
-```
-
-Store this as `$START_SHA`.
+Before any work begins, run `git status` to confirm the working tree is clean. If there are uncommitted changes, ask the user how to proceed before continuing.
 
 ## Step 2: Plan
 
@@ -98,11 +92,13 @@ Move to the next step in the plan and repeat from 3a. Do not proceed to the next
 
 ## Step 4: Reset
 
-Once all steps are implemented, reviewed, and committed, soft reset to the starting point:
+Once all steps are implemented, reviewed, and committed, soft reset to squash the checkpoint commits:
 
-```
-git reset --soft $START_SHA
-```
+1. Determine the reset target:
+   - Run `git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null` to check for a remote tracking branch.
+   - If a tracking branch exists (e.g., `origin/main`), use it as the reset target.
+   - If no tracking branch exists, count the commits made during this session and reset that many commits back.
+2. Run `git reset --soft <target>`.
 
 This leaves all changes staged but uncommitted, so the user can craft the final commit(s) themselves.
 
