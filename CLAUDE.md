@@ -7,7 +7,7 @@ When implementing code changes, follow this workflow for every unit of work:
 1. **Implement** — Use the appropriate implementation agent via the Agent tool.
 2. **Build & format** — Run the build check and format commands for every language touched.
 3. **Review** — Launch a SEPARATE review agent (`model: "sonnet"`) to review all uncommitted changes via `git diff HEAD`. Never review in the implementation context. Never skip this step.
-4. **Fix** — If the review finds issues, fix each one individually, rebuild, commit the fix, and re-review until it passes. One fix per commit.
+4. **Fix** — Review findings are mandatory unless factually inaccurate about the code's actual functionality. The implementing agent does not get to dismiss findings based on preference or judgment. Fix each issue individually, rebuilding after each fix. After all issues are fixed, re-review until the review passes clean.
 5. **Commit** — Only after the review passes and tests pass.
 
 This cycle applies to every discrete step. If a plan has 5 steps, each step goes through all 5 phases independently.
